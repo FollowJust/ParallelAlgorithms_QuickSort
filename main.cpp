@@ -7,7 +7,6 @@
 #include <cmath>
 #include <oneapi/tbb/parallel_invoke.h>
 #include <oneapi/tbb/global_control.h>
-#include <oneapi/tbb/task_arena.h>
 
 static constexpr bool DEBUG_PRINT_VEC = false;
 
