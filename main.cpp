@@ -64,14 +64,29 @@ void print_vec(std::vector<T> &vec)
     std::cout << '\n';
 }
 
+template<typename T, typename compare>
+bool check_vec_sorted(std::vector<T> &vec, compare cmp)
+{
+    for (size_t i = 1; i < vec.size(); ++i)
+    {
+        if (!cmp(vec[i - 1], vec[i])) 
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 template<typename iter, typename compare>
 iter get_partition(iter first, iter second, compare cmp)
 {
     auto pivot = std::prev(second, 1);
     auto i = first;
-    for (auto j = first; j != pivot; ++j){
-        // bool format 
-        if (cmp(*j, *pivot)){
+    for (auto j = first; j != pivot; ++j)
+    {
+        if (cmp(*j, *pivot))
+        {
             std::swap(*i++, *j);
         }
     }
@@ -137,8 +152,11 @@ int main()
 
             {
                 time_point start = std::chrono::high_resolution_clock::now();
-                sequential_quick_sort(std::begin(vec), std::end(vec), std::less<int>());
+                sequential_quick_sort(std::begin(vec), std::end(vec), std::less_equal<int>());
                 time_point end = std::chrono::high_resolution_clock::now();
+
+                assert(check_vec_sorted(vec, std::less_equal<int>()));
+
                 std::cout << "Sequential #" << i << " timer finished: "    << get_microseconds(start, end)   << " microseconds\t/\t" \
                                                     << get_milliseconds(start, end)   << " milliseconds\t/\t" \
                                                     << get_seconds(start, end)        << " seconds\n\n";
@@ -168,8 +186,11 @@ int main()
 
             {
                 time_point start = std::chrono::high_resolution_clock::now();
-                parallel_quick_sort(std::begin(vec), std::end(vec), std::less<int>());
+                parallel_quick_sort(std::begin(vec), std::end(vec), std::less_equal<int>());
                 time_point end = std::chrono::high_resolution_clock::now();
+
+                assert(check_vec_sorted(vec, std::less_equal<int>()));
+
                 std::cout << "Parallel #" << i << " timer finished: "    << get_microseconds(start, end)   << " microseconds\t/\t" \
                                                     << get_milliseconds(start, end)   << " milliseconds\t/\t" \
                                                     << get_seconds(start, end)        << " seconds\n\n";
