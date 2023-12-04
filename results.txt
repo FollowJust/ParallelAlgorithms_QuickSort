@@ -1,21 +1,3 @@
-# ParallelAlgorithms_QuickSort
-
-## How to run
-
-1. Установить oneAPI TBB
-```
-sudo apt install libtbb-dev
-```
-
-2. Запустить программу
-```
-make run
-```
-
-3. Результаты будут записаны в `results.txt`
-
-## Results
-
 Sequential #0 timer finished: 47297340 microseconds	/	47297 milliseconds	/	47 seconds
 
 Sequential #1 timer finished: 47117191 microseconds	/	47117 milliseconds	/	47 seconds
@@ -40,4 +22,4 @@ Parallel #4 timer finished: 14207424 microseconds	/	14207 milliseconds	/	14 seco
 
 Parallel mean time: 1.50826e+07 microseconds
 
-**Sequential to Parallel Ratio: 3.14915**
+Sequential to Parallel Ratio: 3.14915
